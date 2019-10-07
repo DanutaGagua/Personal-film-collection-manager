@@ -81,11 +81,11 @@
 
 ## 2.2 Интерфейс пользователя
 Окно входа в приложение.  
-![Окно входа в приложение](../../Images/Mockups/SignInMockup.png)  
+![Окно входа в приложение](DanutaGagua/Personal-film-collection-manager/Images/Mockups/SignInMockup.png)  
 Окно регистрации нового пользователя.  
-![Окно регистрации нового пользователя](../../Images/Mockups/signing up mockup.PNG)  
+![Окно регистрации нового пользователя](DanutaGagua/Personal-film-collection-manager/Images/Mockups/signing up mockup.png)  
 Окно входа для зарегистрированного пользователя.  
-![Окно входа для зарегистрированного пользователя](../Images/Mockups/signing in mockup.PNG)  
+![Окно входа для зарегистрированного пользователя](DanutaGagua/Personal-film-collection-manager/Images/Mockups/signing in mockup.png)  
 Главное окно приложения (пользователь зарегестрирован).  
 ![Главное окно приложения](../../Images/Mockups/MainWindow1.PNG)  
 Главное окно приложения после выбора новости в таблице (пользователь зарегестрирован).  
