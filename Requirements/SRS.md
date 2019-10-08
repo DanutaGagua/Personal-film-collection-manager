@@ -86,11 +86,11 @@
 
 Окно регистрации нового пользователя.  
 
-![Окно регистрации нового пользователя](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SigningUpMockup.png)  
+![Окно регистрации нового пользователя](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SigningUpMockup.png) 
 
-![Окно регистрации нового пользователя после ввода имени, уже зарегистрированного в приложении]
+Окно регистрации нового пользователя после ввода имени, уже зарегистрированного в приложении. 
 
-(https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/CheckOfCorrectSigningUpMockup.png)  
+![Окно регистрации нового пользователя после ввода имени, уже зарегистрированного в приложении](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/CheckOfCorrectSigningUpMockup.png)  
 
 Окно входа для зарегистрированного пользователя.  
 
