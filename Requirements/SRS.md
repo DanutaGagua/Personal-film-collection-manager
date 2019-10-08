@@ -100,17 +100,17 @@
 
 ![Главное окно приложения](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmListMockup.PNG)  
 
-Главное окно приложения после выбора новости в таблице (пользователь зарегистрирован). 
+Главное окно приложения после выбора фильма в таблице (пользователь зарегистрирован). 
 
-![Главное окно приложения после выбора новости в таблице](../../Images/Mockups/MainWindow2.PNG) 
+![Главное окно приложения после выбора фильма в таблице](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmInformationMockup.png) 
 
-Главное окно приложения после выбора новости в таблице (анонимный пользователь).  
+Главное окно приложения(анонимный пользователь).  
 
-![Главное окно приложения после выбора новости в таблице](../../Images/Mockups/MainWindowAnonymousUser.PNG)  
+![Главное окно приложения анонимный пользователь](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserFilmSearchMockup.png)  
 
-Окно настройки профиля пользователя.  
+Главное окно приложения при ошибке поиска(анонимный пользователь).  
 
-![Окно настройки профиля пользователя](../../Images/Mockups/SettingUpAUserProfile.PNG)
+![Главное окно приложения при ошибке поиска анонимный пользователь](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserFilmSearchErrorMockup.png)  
 
 <a name="user_specifications"/>
 
