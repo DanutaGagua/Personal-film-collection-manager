@@ -81,7 +81,7 @@
 
 ## 2.2 Интерфейс пользователя
 Окно входа в приложение.  
-![Окно входа в приложение](../../Mockups/SignInMockup.PNG)  
+![Окно входа в приложение](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignInMockup.PNG)  
 Окно регистрации нового пользователя.  
 ![Окно регистрации нового пользователя](../../Mockups/SigningInMockup.png)  
 Окно входа для зарегистрированного пользователя.  
