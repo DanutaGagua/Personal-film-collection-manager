@@ -82,7 +82,7 @@
 ## 2.2 Интерфейс пользователя
 Окно входа в приложение.  
 
-![Окно входа в приложение](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignInMockup.PNG)  
+![Окно входа в приложение](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignInMockup.png)  
 
 Окно регистрации нового пользователя.  
 
@@ -250,7 +250,7 @@
 Окна приложения удобны для использования пользователями:
   * размер шрифта не должен быть слишком маленьким;
   * цветовая гамма сбалансирована и не режет глаза;
-  * приложение отображает интерфейс полность.
+  * интерфейс оформлен в соответствии в Android стандартами.
 
 <a name="restrictions"/>
 
