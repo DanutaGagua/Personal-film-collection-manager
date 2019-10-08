@@ -81,12 +81,17 @@
 
 ## 2.2 Интерфейс пользователя
 Окно входа в приложение.  
+
 ![Окно входа в приложение](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignInMockup.PNG)  
+
 Окно регистрации нового пользователя.  
-![Окно регистрации нового пользователя](../../Mockups/SigningInMockup.png)  
+
+![Окно регистрации нового пользователя](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SigningUpMockup.png)  
+
 Окно входа для зарегистрированного пользователя.  
-![Окно входа для зарегистрированного пользователя](../../Mockups/SigningInMockup.png)  
-Главное окно приложения (пользователь зарегистрирован).  
+
+![Окно входа для зарегистрированного пользователя](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SigningInMockup.png).  
+
 ![Главное окно приложения](../../Images/Mockups/SignUserFilmListMockup.PNG)  
 Главное окно приложения после выбора новости в таблице (пользователь зарегестрирован).  
 ![Главное окно приложения после выбора новости в таблице](../../Images/Mockups/MainWindow2.PNG)  
