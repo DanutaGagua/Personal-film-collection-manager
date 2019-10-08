@@ -104,11 +104,19 @@
 
 ![Главное окно приложения после выбора фильма в таблице](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmInformationMockup.png) 
 
-Главное окно приложения(анонимный пользователь).  
+Окно поиска (пользователь зарегистрирован). 
+
+![Окно поиска](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmSearchMockup.png) 
+
+Окно поиска при ошибке(пользователь зарегистрирован). 
+
+![Окно поиска при ошибке](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmSearchErrorMockup.png)  
+
+Главное окно приложения (анонимный пользователь).  
 
 ![Главное окно приложения анонимный пользователь](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserFilmSearchMockup.png)  
 
-Главное окно приложения при ошибке поиска(анонимный пользователь).  
+Главное окно приложения при ошибке поиска (анонимный пользователь).  
 
 ![Главное окно приложения при ошибке поиска анонимный пользователь](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserFilmSearchErrorMockup.png)  
 
