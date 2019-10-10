@@ -32,7 +32,7 @@
 3.2.1 [Атрибуты качества](#quality_attributes)  
 3.2.1.1 [Требования к удобству использования](#requirements_for_ease_of_use)  
 3.2.1.2 [Требования к безопасности](#security_requirements)
-
+3.2.1.3 [Требования к доступности](#access_requirements)
 3.2.2 [Внешние интерфейсы](#external_interfaces)  
 3.2.3 [Ограничения](#restrictions)  
 
