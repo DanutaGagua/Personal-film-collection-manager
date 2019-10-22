@@ -6,7 +6,7 @@
 
 ### 1. Вход в учётную запись<a name="1"></a>
 
-![Вход в учётную запись](https://raw.githubusercontent.com/anyatsal/ChefsBoutique/master/Documents/Diagrams/Activity/Images/Authorization.png)
+![Вход в учётную запись](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Diagrams/Images/ActivityDiagramSignIn.png)
 
 ### 2. Регистрация в приложении<a name="2"></a>
 
