@@ -1,3 +1,5 @@
+# Диаграммы последовательностей
+
 # Содержание
 1. [Вход в учётную запись](#1)
 2. [Регистрация в приложении](#2)
@@ -14,4 +16,4 @@
   
 ### 3. Добавление фильма<a name="3"></a>
 
-![Добавление фильма](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Diagrams/Images/ActivityDiagramAddFilm.png)
+![Добавление фильма](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Diagrams/Images/SequenceDiagramAddFilm.png)
