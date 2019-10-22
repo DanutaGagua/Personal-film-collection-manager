@@ -10,7 +10,7 @@
 
 ### 2. Регистрация в приложении<a name="2"></a>
 
-![Регистрация в приложении](https://raw.githubusercontent.com/anyatsal/ChefsBoutique/master/Documents/Diagrams/Activity/Images/Registration.png)
+![Регистрация в приложении](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Diagrams/Images/ActivityDiagramSignUp.png)
   
 ### 3. Вход в качестве посетителя<a name="3"></a>
 
