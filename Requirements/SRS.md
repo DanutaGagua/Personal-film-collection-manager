@@ -83,43 +83,43 @@
 ## 2.2 Интерфейс пользователя
 Окно входа в приложение.  
 
-![Окно входа в приложение](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignInMockup.png)  
+![Окно входа в приложение](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups)  
 
 Окно регистрации нового пользователя.  
 
-![Окно регистрации нового пользователя](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SigningUpMockup.png) 
+![Окно регистрации нового пользователя](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups) 
 
 Окно регистрации нового пользователя после ввода имени, уже зарегистрированного в приложении. 
 
-![Окно регистрации нового пользователя после ввода имени, уже зарегистрированного в приложении](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/CheckOfCorrectSigningUpMockup.png)  
+![Окно регистрации нового пользователя после ввода имени, уже зарегистрированного в приложении](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups)  
 
 Окно входа для зарегистрированного пользователя.  
 
-![Окно входа для зарегистрированного пользователя](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SigningInMockup.png).
+![Окно входа для зарегистрированного пользователя](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups).
 
 Главное окно приложения (пользователь зарегистрирован). 
 
-![Главное окно приложения](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmListMockup.PNG)  
+![Главное окно приложения](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups)  
 
 Главное окно приложения после выбора фильма в таблице (пользователь зарегистрирован). 
 
-![Главное окно приложения после выбора фильма в таблице](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmInformationMockup.png) 
+![Главное окно приложения после выбора фильма в таблице](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups) 
 
 Окно поиска (пользователь зарегистрирован). 
 
-![Окно поиска](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmSearchMockup.png) 
+![Окно поиска](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups) 
 
 Окно поиска при ошибке(пользователь зарегистрирован). 
 
-![Окно поиска при ошибке](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserFilmSearchErrorMockup.png)  
+![Окно поиска при ошибке](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups)  
 
 Главное окно приложения (посетитель).  
 
-![Главное окно приложения посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserFilmSearchMockup.png)  
+![Главное окно приложения посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups)  
 
 Главное окно приложения при ошибке поиска (посетитель).  
 
-![Главное окно приложения при ошибке поиска посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserFilmSearchErrorMockup.png)  
+![Главное окно приложения при ошибке поиска посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups)  
 
 <a name="user_specifications"/>
 
