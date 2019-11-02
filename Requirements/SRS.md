@@ -115,15 +115,23 @@
 
 Окно с информацией о найденном фильме (пользователь зарегистрирован).  
 
-![Окно с информацией о найденном фильме](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserSerchedFilmInformationMockup%20.png)
+![Окно с информацией о найденном фильме](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SignUserSerchedFilmInformationMockup%20.png)  
+
+Окно с выделением фильма, который будут удалять (пользователь зарегистрирован).  
+
+![Окно с выделением фильма, который будут удалять](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/SelectToDeleteFilmMockup.png) 
 
 Главное окно приложения (посетитель).  
 
-![Главное окно приложения посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups)  
+![Главное окно приложения посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserFilmSearchMockup.png)  
 
 Главное окно приложения при ошибке поиска (посетитель).  
 
-![Главное окно приложения при ошибке поиска посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups)  
+![Главное окно приложения при ошибке поиска посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserFilmSearchErrorMockup.png)    
+
+Окно с информацией о найденном фильме (посетитель).  
+
+![Окно с информацией о найденном фильме посетитель](https://github.com/DanutaGagua/Personal-film-collection-manager/blob/master/Mockups/UnsignUserSerchedFilmInformationMockup%20.png)  
 
 <a name="user_specifications"/>
 
