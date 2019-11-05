@@ -2,6 +2,8 @@
 
 This program allows to find information about your favorite films.
 
+Operation system: Android  
+
 Language: Java.  
 Interface language: xml.
 
