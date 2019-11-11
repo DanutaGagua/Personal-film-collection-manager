@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+    boolean visitor = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void signInAsVisitor(View view)
     {
+        visitor = true;
+
         Intent intent = new Intent(this, FindFilmActivity.class);
+        intent.putExtra("visitorFlag", visitor);
         startActivity(intent);
     }
 }
