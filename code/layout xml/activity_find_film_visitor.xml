@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
 
-        android:text="Enter film name to find it"
+        android:hint="Enter film name to find it"
         android:textAlignment="center"
         android:textSize="20sp"
 
