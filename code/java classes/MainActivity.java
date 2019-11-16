@@ -16,14 +16,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void signIn(View view)
     {
-        Intent intent = new Intent(this, SignInActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, SignInActivity.class));
     }
 
     public void signUp(View view)
     {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, SignUpActivity.class));
     }
 
     public void signInAsVisitor(View view)
@@ -31,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
         visitor = true;
 
         Intent intent = new Intent(this, FindFilmActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("visitorFlag", visitor);
+        
         startActivity(intent);
     }
 }
