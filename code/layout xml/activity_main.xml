@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity"
+
     android:orientation="vertical">
 
     <TextView
         android:layout_marginTop="50dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
 
         android:text="Sign in or sign up"
         android:textAlignment="center"
-        android:textSize="24sp"
-
-        android:layout_gravity="center_horizontal"/>
+        android:textSize="24sp"/>
 
     <Button
         android:layout_marginTop="15dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
 
         android:text="Sign in"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="20sp"
-
-        android:layout_gravity="center_horizontal"
 
         android:onClick="signIn"/>
 
@@ -35,13 +36,12 @@
         android:layout_marginTop="50dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
 
         android:text="Sign up"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="20sp"
-
-        android:layout_gravity="center_horizontal"
 
         android:onClick="signUp"/>
 
@@ -49,13 +49,12 @@
         android:layout_marginTop="50dp"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
 
         android:text="Sign in as visitor"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="20sp"
-
-        android:layout_gravity="center_horizontal"
 
         android:onClick="signInAsVisitor"/>
 
@@ -63,11 +62,10 @@
         android:layout_marginTop="40dp"
         android:layout_width="225dp"
         android:layout_height="120dp"
+        android:layout_gravity="center"
 
         android:text="Help:
 If you want to use application without signing up click button &quot;Sign in as visitor&quot;"
-        android:textSize="18sp"
-
-        android:layout_gravity="center"/>
+        android:textSize="18sp"/>
 
 </LinearLayout>
