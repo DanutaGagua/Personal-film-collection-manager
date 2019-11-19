@@ -2,7 +2,7 @@ package com.example.personalfilmcollectionmanager;
 
 public class Film {
     String name;
-    String year;
+    String year; 
     String releaseDate;
     String country;
     String budget;
@@ -16,8 +16,7 @@ public class Film {
                 String country,
                 String budget,
                 String cumulativeWorldwideGross,
-                String runtime)
-    {
+                String runtime) {
         this.name = name;
         this.year = year;
         this.releaseDate = releaseDate;
@@ -27,8 +26,15 @@ public class Film {
         this.runtime = runtime;
     }
 
-    public void setUserFeedback(String userFeedback)
-    {
+    public void setUserFeedback(String userFeedback) {
         this.userFeedback = userFeedback;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getYear() {
+        return year;
     }
 }
