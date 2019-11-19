@@ -6,17 +6,13 @@ public class User implements Serializable {
     String name;
     FilmList filmList;
 
-    public User()
-    {
+    public User() {
         this.name = "";
-
         filmList = new FilmList();
     }
 
-    public User(String name)
-    {
+    public User(String name) {
         this.name = name;
-
         filmList = new FilmList();
     }
 }
