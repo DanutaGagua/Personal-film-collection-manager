@@ -28,4 +28,21 @@ public class UserList {
     {
         userList.remove(user);
     }
+
+    public int getUserNumber()
+    {
+        return userList.size();
+    }
+
+    public String[] getUserNames()
+    {
+        String[] names = new String[userList.size()];
+
+        for (User user: userList)
+        {
+            names[userList.indexOf(user)] = user.name;
+        }
+
+        return names;
+    }
 }
