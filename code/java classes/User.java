@@ -1,8 +1,17 @@
 package com.example.personalfilmcollectionmanager;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     String name;
     FilmList filmList;
+
+    public User()
+    {
+        this.name = "";
+
+        filmList = new FilmList();
+    }
 
     public User(String name)
     {
