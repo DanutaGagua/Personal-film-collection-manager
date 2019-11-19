@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SignInActivity extends AppCompatActivity {
     UserList userList;
@@ -33,8 +34,17 @@ public class SignInActivity extends AppCompatActivity {
 
     public void signIn(View view)
     {
-        //Intent intent = new Intent(this, SignInActivity.class);
-        //startActivity(intent);
+        if (userList.getUserNumber() != 0)
+        {
+            Spinner spinner = (Spinner) findViewById(R.id.users);
+            String name = spinner.getSelectedItem().toString();
+
+            User user = userList.findUser(name);
+
+            Intent intent = new Intent(this, FilmListActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+        }
     }
 
     public void cancel(View view)
