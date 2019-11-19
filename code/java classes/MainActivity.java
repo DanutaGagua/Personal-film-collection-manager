@@ -17,18 +17,15 @@ public class MainActivity extends AppCompatActivity {
         setHelpTextView();
     }
 
-    public void signIn(View view)
-    {
+    public void signIn(View view){
         startActivity(new Intent(this, SignInActivity.class));
     }
 
-    public void signUp(View view)
-    {
+    public void signUp(View view){
         startActivity(new Intent(this, SignUpActivity.class));
     }
 
-    public void signInAsVisitor(View view)
-    {
+    public void signInAsVisitor(View view){
         visitor = true;
 
         Intent intent = new Intent(this, FindFilmActivity.class);
@@ -38,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void setHelpTextView()
-    {
+    private void setHelpTextView(){
         TextView textView = findViewById(R.id.help_text_view);
         textView.setText("Help:\nIf you want to use application without signing up click button \"Sign in as visitor\"");
     }
