@@ -3,7 +3,7 @@ package com.example.personalfilmcollectionmanager;
 import java.util.ArrayList;
 
 public class FilmList {
-    ArrayList<Film> filmList;
+    private ArrayList<Film> filmList;
 
     public FilmList() {
         filmList = new ArrayList<>();
