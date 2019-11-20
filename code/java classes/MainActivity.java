@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    boolean visitor = false;
+    private boolean visitor = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signUp(View view) {
-        startActivity(new Intent(this, SignUpActivity.class));
+        Intent intent = new Intent(this, SignUpActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("visitorFlag", visitor);
+        intent.putExtra("previousClassName", "MainActivity");
+
+        startActivity(intent);
     }
 
     public void signInAsVisitor(View view) {
