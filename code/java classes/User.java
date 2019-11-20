@@ -3,8 +3,8 @@ package com.example.personalfilmcollectionmanager;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    String name;
-    FilmList filmList;
+    private String name;
+    private FilmList filmList;
 
     public User() {
         this.name = "";
@@ -14,5 +14,9 @@ public class User implements Serializable {
     public User(String name) {
         this.name = name;
         filmList = new FilmList();
+    }
+
+    public String getName() {
+        return name;
     }
 }
