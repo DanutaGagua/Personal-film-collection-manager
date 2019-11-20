@@ -18,12 +18,13 @@
         android:textSize="26sp"/>
 
     <TextView
+        android:id="@+id/activity_sign_up_info"
+
         android:layout_marginTop="15dp"
         android:layout_width="210dp"
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
 
-        android:text="Enter username and add new user"
         android:textAlignment="center"
         android:textSize="23sp"/>
 
