@@ -1,16 +1,20 @@
 package com.example.personalfilmcollectionmanager;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class SignUpActivity extends AppCompatActivity {
     private String previousClassName = "";
     private UserList userList;
+    private boolean visitor = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +23,32 @@ public class SignUpActivity extends AppCompatActivity {
 
         Bundle arguments = getIntent().getExtras();
         previousClassName = arguments.getString("previousClassName");
+        visitor = arguments.getBoolean("visitorFlag");
 
-        TextView textView = findViewById(R.id.activity_sign_in_info);
+        userList = getUserList();
+
+        TextView textView = findViewById(R.id.activity_sign_up_info);
         textView.setText("Enter username and \n add new user");
     }
 
     public void signUp(View view) {
-        //if ()
+        EditText editText = findViewById(R.id.new_user_name);
+        String newUserName = editText.getText().toString();
 
-        //Intent intent = new Intent(this, SignInActivity.class);
-        //startActivity(intent);
+        if (userList.checkIfExistUser(newUserName)) {
+            TextView textView = findViewById(R.id.activity_sign_up_info);
+            textView.setText("This username is existing. \n Enter another username");
+            editText.setText("");
+            editText.setHint("Enter username");
+        } else {
+            userList.addUser(new User(newUserName));
+        }
+
+        //addNewUserToDataBase(newUserName);
+
+        Intent intent = new Intent(this, FilmListActivity.class);
+        intent.putExtra("user", new User(newUserName));
+        startActivity(intent);
     }
 
     public void cancel(View view) {
@@ -43,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        // intent.putExtra("visitorFlag", visitor);
+        intent.putExtra("visitorFlag", visitor);
         startActivity(intent);
     }
 
@@ -60,6 +80,19 @@ public class SignUpActivity extends AppCompatActivity {
             userList.addUser(new User(name));
         }
 
+        query.close();
+        db.close();
+
         return userList;
+    }
+
+    private void addNewUserToDataBase(String newUserName)
+    {
+        ContentValues cv = new ContentValues();
+        //cv.put(DatabaseHelper.COLUMN_NAME, nameBox.getText().toString());
+
+        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
+        db.execSQL("INSERT INTO users VALUES (newUserName);");
+        db.close();
     }
 }
