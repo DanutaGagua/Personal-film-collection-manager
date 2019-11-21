@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class FilmListActivity extends AppCompatActivity {
-    User user;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,16 +18,14 @@ public class FilmListActivity extends AppCompatActivity {
 
     }
 
-    public void exit(View view)
-    {
-        Intent intent = new Intent(this, SignUpActivity.class);
+    public void exit(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
-    public void addNewFilm(View view)
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void addNewFilm(View view) {
+        //Intent intent = new Intent(this, MainActivity.class);
+        //startActivity(intent);
     }
 }
