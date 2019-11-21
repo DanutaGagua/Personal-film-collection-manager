@@ -63,6 +63,9 @@ public class SignInActivity extends AppCompatActivity {
             userList.addUser(new User(name));
         }
 
+        query.close();
+        db.close();
+
         return userList;
     }
 
