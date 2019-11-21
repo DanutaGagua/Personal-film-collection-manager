@@ -3,7 +3,7 @@ package com.example.personalfilmcollectionmanager;
 import java.util.ArrayList;
 
 public class UserList {
-    ArrayList<User> userList;
+    private ArrayList<User> userList;
 
     public UserList() {
         userList = new ArrayList<>();
@@ -31,7 +31,7 @@ public class UserList {
         String[] names = new String[userList.size()];
 
         for (User user: userList) {
-            names[userList.indexOf(user)] = user.name;
+            names[userList.indexOf(user)] = user.getName();
         }
 
         return names;
@@ -41,13 +41,23 @@ public class UserList {
         User user = new User();
 
         for (User userIndex: userList) {
-            if (userIndex.name.equals(name)) {
+            if (userIndex.getName().equals(name)) {
                 user = userIndex;
-                
+
                 break;
             }
         }
 
         return user;
+    }
+
+    public boolean checkIfExistUser(String name) {
+        for (User user: userList) {
+            if (user.getName().equals(name)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
