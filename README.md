@@ -12,3 +12,6 @@ Interface language: xml.
 [User interface images](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/Mockups)
 
 [Diagrams](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/Diagrams)
+
+Used patterns:  
+Observer - listeners that listen button clicks, listeners of EditTexts
