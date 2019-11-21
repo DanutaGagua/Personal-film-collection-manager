@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 public class FindFilmActivity extends AppCompatActivity {
-    boolean visitor = false;
+    private boolean visitor = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,36 +15,30 @@ public class FindFilmActivity extends AppCompatActivity {
         Bundle arguments = getIntent().getExtras();
         visitor = arguments.getBoolean("visitorFlag");
 
-        if (visitor)
-        {
+        if (visitor) {
             setContentView(R.layout.activity_find_film_visitor);
-        }
-        else
-        {
+        } else {
             setContentView(R.layout.activity_find_film_user);
         }
     }
 
-    public void cancel(View view)
-    {
+    public void cancel(View view) {
         //Intent intent = new Intent(this, SignUpActivity.class);
         //startActivity(intent);
     }
 
-    public void signUp(View view)
-    {
+    public void signUp(View view) {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
 
-    public void exit(View view)
-    {
+    public void exit(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
-    public void find(View view)
-    {
+    public void find(View view) {
 
     }
 }
