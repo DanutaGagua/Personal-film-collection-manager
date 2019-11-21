@@ -2,11 +2,10 @@ package com.example.personalfilmcollectionmanager;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 
 public class ShowFilmInformationActivity extends AppCompatActivity {
-    boolean visitor = false;
-    Film film;
+    private boolean visitor = false;
+    private Film film;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,20 +15,16 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
         visitor = arguments.getBoolean("visitorFlag");
         film = (Film) arguments.get("film");
 
-        if (visitor)
-        {
+        if (visitor) {
             setContentView(R.layout.activity_show_found_film_information_visitor);
 
             setInfo();
-        }
-        else
-        {
+        } else {
             //setContentView(R.layout.activity_find_film_user);
         }
     }
 
-    private void setInfo()
-    {
+    private void setInfo() {
         //TextView textView = findViewById(R.id)
     }
 }
