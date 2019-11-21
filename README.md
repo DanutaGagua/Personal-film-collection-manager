@@ -13,5 +13,8 @@ Interface language: xml.
 
 [Diagrams](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/Diagrams)
 
+[java code](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/code/java%20classes)  
+[xml code](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/code/layout%20xml) 
+
 Used patterns:  
 Observer - listeners of buttons, listeners of EditTexts
