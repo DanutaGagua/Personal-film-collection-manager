@@ -14,4 +14,4 @@ Interface language: xml.
 [Diagrams](https://github.com/DanutaGagua/Personal-film-collection-manager/tree/master/Diagrams)
 
 Used patterns:  
-Observer - listeners that listen button clicks, listeners of EditTexts
+Observer - listeners of buttons, listeners of EditTexts
