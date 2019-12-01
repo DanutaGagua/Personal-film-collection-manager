@@ -7,17 +7,33 @@
 
     android:orientation="vertical">
 
-    <include layout="@layout/find_info_layout"
+    <TextView
+        android:id="@+id/find_film_name_show_activity"
+
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        />
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+
+        android:textAlignment="center"
+        android:textSize="26sp"/>
+
+    <ScrollView
+        android:id="@+id/find_film_name"
+
+        android:layout_marginTop="150dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+    />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+
+        android:orientation="horizontal">
 
         <Button
             android:layout_width="0dp"
@@ -25,12 +41,12 @@
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
 
-            android:text="Cancel"
+            android:text="Sign up"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="20sp"
 
-            android:onClick="cancel"/>
+            android:onClick="signUp"/>
 
         <Button
             android:layout_width="0dp"
@@ -38,25 +54,12 @@
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
 
-            android:text="Exit"
+            android:text="Back"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="20sp"
 
-            android:onClick="exit"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
-
-            android:text="Find"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="20sp"
-
-            android:onClick="find"/>
+            android:onClick="back"/>
 
     </LinearLayout>
 
