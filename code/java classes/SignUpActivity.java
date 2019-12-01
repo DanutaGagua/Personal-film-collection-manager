@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -35,20 +34,20 @@ public class SignUpActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.new_user_name);
         String newUserName = editText.getText().toString();
 
-        if (userList.checkIfExistUser(newUserName)) {
+        if (userList.checkIfExistUser(newUserName) || newUserName.equals("")) {
             TextView textView = findViewById(R.id.activity_sign_up_info);
-            textView.setText("This username is existing. \n Enter another username");
+            textView.setText("This username is existing. \nEnter another username");
             editText.setText("");
             editText.setHint("Enter username");
         } else {
             userList.addUser(new User(newUserName));
+
+            addNewUserToDataBase(newUserName);
+
+            Intent intent = new Intent(this, FilmListActivity.class);
+            intent.putExtra("username", newUserName);
+            startActivity(intent);
         }
-
-        //addNewUserToDataBase(newUserName);
-
-        Intent intent = new Intent(this, FilmListActivity.class);
-        intent.putExtra("user", new User(newUserName));
-        startActivity(intent);
     }
 
     public void cancel(View view) {
@@ -76,7 +75,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         if(query.moveToFirst()) {
             String name = query.getString(0);
-
             userList.addUser(new User(name));
         }
 
@@ -86,13 +84,9 @@ public class SignUpActivity extends AppCompatActivity {
         return userList;
     }
 
-    private void addNewUserToDataBase(String newUserName)
-    {
-        ContentValues cv = new ContentValues();
-        //cv.put(DatabaseHelper.COLUMN_NAME, nameBox.getText().toString());
-
+    private void addNewUserToDataBase(String newUserName) {
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
-        db.execSQL("INSERT INTO users VALUES (newUserName);");
+        db.execSQL("INSERT INTO users VALUES ('"+ newUserName +"');");
         db.close();
     }
 }
