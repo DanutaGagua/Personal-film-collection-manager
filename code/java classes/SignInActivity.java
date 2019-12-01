@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SignInActivity extends AppCompatActivity {
     private UserList userList;
@@ -36,10 +37,8 @@ public class SignInActivity extends AppCompatActivity {
             Spinner spinner = findViewById(R.id.users);
             String name = spinner.getSelectedItem().toString();
 
-            User user = userList.findUser(name);
-
             Intent intent = new Intent(this, FilmListActivity.class);
-            intent.putExtra("user", user);
+            intent.putExtra("username", name);
             startActivity(intent);
         }
     }
@@ -58,9 +57,11 @@ public class SignInActivity extends AppCompatActivity {
         Cursor query = db.rawQuery("SELECT * FROM users;", null);
 
         if(query.moveToFirst()) {
-            String name = query.getString(0);
+            do{
+                String name = query.getString(0);
 
-            userList.addUser(new User(name));
+                userList.addUser(new User(name));
+            } while(query.moveToNext());
         }
 
         query.close();
