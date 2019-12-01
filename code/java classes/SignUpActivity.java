@@ -33,19 +33,22 @@ public class SignUpActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.new_user_name);
         String newUserName = editText.getText().toString();
 
-        if (userList.checkIfExistUser(newUserName) || newUserName.equals("")) {
-            TextView textView = findViewById(R.id.activity_sign_up_info);
-            textView.setText("This username is existing. \nEnter another username");
-            editText.setText("");
-            editText.setHint("Enter username");
-        } else {
-            userList.addUser(new User(newUserName));
+        if (!newUserName.equals("")) {
+            if (userList.checkIfExistUser(newUserName)) {
+                TextView textView = findViewById(R.id.activity_sign_up_info);
+                textView.setText("This username is existing. \nEnter another username");
 
-            addNewUserToDataBase(newUserName);
+                editText.setText("");
+                editText.setHint("Enter username");
+            } else {
+                userList.addUser(new User(newUserName));
 
-            Intent intent = new Intent(this, FilmListActivity.class);
-            intent.putExtra("username", newUserName);
-            startActivity(intent);
+                addNewUserToDataBase(newUserName);
+
+                Intent intent = new Intent(this, FilmListActivity.class);
+                intent.putExtra("username", newUserName);
+                startActivity(intent);
+            }
         }
     }
 
@@ -73,8 +76,11 @@ public class SignUpActivity extends AppCompatActivity {
         Cursor query = db.rawQuery("SELECT * FROM users;", null);
 
         if(query.moveToFirst()) {
-            String name = query.getString(0);
-            userList.addUser(new User(name));
+            do{
+                String name = query.getString(0);
+
+                userList.addUser(new User(name));
+            } while(query.moveToNext());
         }
 
         query.close();
