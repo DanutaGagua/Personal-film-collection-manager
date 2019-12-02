@@ -7,26 +7,12 @@
 
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/find_film_name_show_activity"
-
+    <include layout="@layout/find_info_layout"
         android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="5dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-
-        android:textAlignment="center"
-        android:textSize="26sp"/>
-
-    <ScrollView
-        android:id="@+id/find_film_name"
-
-        android:layout_marginTop="150dp"
-        android:layout_marginHorizontal="25dp"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_centerHorizontal="true"
-    />
+        android:layout_height="200dp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,12 +40,12 @@
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
 
-            android:text="Back"
+            android:text="Find"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="20sp"
 
-            android:onClick="back"/>
+            android:onClick="find"/>
 
     </LinearLayout>
 
