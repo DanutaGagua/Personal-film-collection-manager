@@ -1,6 +1,7 @@
 package com.example.personalfilmcollectionmanager;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 public class ShowFilmInformationActivity extends AppCompatActivity {
     private boolean visitor = false;
     private Film film;
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,21 +18,35 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
 
         Bundle arguments = getIntent().getExtras();
         visitor = arguments.getBoolean("visitorFlag");
-        //film = (Film) arguments.get("film");
+        film = new Film(arguments.getString("filmInfo"));
 
         if (visitor) {
             setContentView(R.layout.activity_show_found_film_information_visitor);
         } else {
             setContentView(R.layout.activity_show_found_film_information_user);
+
+            userName = arguments.getString("username");
         }
 
-        //setInfo(arguments.getString("filmInfo"));
+        setInfo();
     }
 
-    private void setInfo(String filmInfo) {
-        TextView textView = findViewById(R.id.find_film_name_show_activity);
+    private void setInfo() {
+        TextView textView = findViewById(R.id.found_film_name);
 
-        textView.setText(filmInfo.substring(filmInfo.indexOf("movie title=\"") + 13, filmInfo.indexOf("year=\"")));
+        textView.setText(film.getName());
+
+        TextView textInfo = findViewById(R.id.found_film_year);
+        textInfo.setText("Year           " + film.getYear());
+
+        textInfo = findViewById(R.id.found_film_release_date);
+        textInfo.setText("Release Date   " + film.getReleaseDate());
+
+        textInfo = findViewById(R.id.found_film_country);
+        textInfo.setText("Country        " + film.getCountry());
+
+        textInfo = findViewById(R.id.found_film_runtime);
+        textInfo.setText("Runtime        " + film.getRuntime());
     }
 
     public void back(View view) {
@@ -48,9 +64,9 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
     }
 
     public void cancel(View view) {
-        /*Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, FindFilmActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     public void exit(View view) {
@@ -60,8 +76,16 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
-        /*Intent intent = new Intent(this, MainActivity.class);
+        addNewFilmToDataBase(film);
+
+        Intent intent = new Intent(this, FilmListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);*/
+        startActivity(intent);
+    }
+
+    private void addNewFilmToDataBase(Film film) {
+        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
+        db.execSQL("INSERT INTO " + userName + " VALUES ('" + film.getName() + "','" + film.getYear() + "','" + film.getReleaseDate() + "','"+ film.getCountry() +"','"+ film.getRuntime() +"');");
+        db.close();
     }
 }
