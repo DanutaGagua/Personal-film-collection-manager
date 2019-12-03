@@ -18,3 +18,6 @@ Interface language: xml.
 
 Used patterns:  
 Observer - listeners of buttons
+
+[Test plan](https://github.com/DanutaGagua/Personal-film-collection-manager/Test%20plan.md)  
+[Test results](https://github.com/DanutaGagua/Personal-film-collection-manager/Test%20results.md) 
