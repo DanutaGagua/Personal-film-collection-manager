@@ -4,25 +4,22 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
 
 public class FindFilmActivity extends AppCompatActivity {
-    private boolean visitor = false;
+    private boolean visitor = false, end = false;
     String filmInfo = "";
+    String userName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +32,15 @@ public class FindFilmActivity extends AppCompatActivity {
             setContentView(R.layout.activity_find_film_visitor);
         } else {
             setContentView(R.layout.activity_find_film_user);
+
+            userName = arguments.getString("username");
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        filmInfo = "";
     }
 
     public void cancel(View view) {
@@ -59,21 +64,31 @@ public class FindFilmActivity extends AppCompatActivity {
 
     public void find(View view) {
         EditText editText = findViewById(R.id.find_film_name);
-        String filmName = editText.toString().replaceAll(" ", "+");
+        String filmName = editText.getText().toString().replaceAll(" ", "+");
 
-        new ProgressTask().execute(filmName);
+        ProgressTask progressTask = new ProgressTask();
+        progressTask.execute(filmName);
 
-        Intent intent = new Intent(this, ShowFilmInformationActivity.class);
-        intent.putExtra("visitorFlag", visitor);
+        TextView textView = findViewById(R.id.find_film_info);
 
-        TextView textView = findViewById(R.id.film_info);
-        textView.setText(filmInfo);
+        if (filmInfo.equals("")) {
+            textView.setText("Enter button \"Find\" another.");
+            return;
+        }
 
-        Toast.makeText(this,"visitorFlag", Toast.LENGTH_SHORT).show();
-
-        //if (!filmInfo.equals(""))
-        //intent.putExtra("filmInfo", filmInfo);
-        //startActivity(intent);
+        if (filmInfo.indexOf("False") != -1) {
+            textView.setText("Can't find this film. It isn't existing.");
+        } else {
+            if (filmInfo.indexOf("Unable") != -1){
+                textView.setText("No network connection.");
+            } else {
+                Intent intent = new Intent(this, ShowFilmInformationActivity.class);
+                intent.putExtra("visitorFlag", visitor);
+                intent.putExtra("filmInfo", filmInfo);
+                intent.putExtra("username", userName);
+                startActivity(intent);
+            }
+        }
     }
 
     private class ProgressTask extends AsyncTask<String, Void, String> {
@@ -92,37 +107,36 @@ public class FindFilmActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String content) {
             filmInfo = content;
+            end = true;
         }
 
         private String getContent(String filmName) throws IOException {
-            BufferedReader reader=null;
+            BufferedReader reader = null;
             try {
-                URL url=new URL("https://www.omdbapi.com/?t=" + filmName + "&r=xml&apikey=1d4c22a7");
-                //Toast.makeText(se, url.toString(), Toast.LENGTH_SHORT).show();
+                URL url = new URL("https://www.omdbapi.com/?t=" + filmName + "&plot=full&apikey=1d4c22a7");
 
-                HttpsURLConnection c=(HttpsURLConnection)url.openConnection();
-                c.setRequestMethod("GET");
-                c.setReadTimeout(10000);
-                c.connect();
+                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
 
-                reader= new BufferedReader(new InputStreamReader(c.getInputStream()));
-                StringBuilder buf=new StringBuilder();
-                String line=null;
+                urlConnection.setConnectTimeout(10000);
+                urlConnection.setReadTimeout(10000);
+                urlConnection.connect();
 
-                while ((line=reader.readLine()) != null) {
-                    buf.append(line + "\n");
+                reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line).append("\n");
                 }
 
-                return(buf.toString());
-            } catch(MalformedURLException e) {
-                Log.e("downloadXML", "downloadXML: Invalid URL " + e.getMessage());
+                return stringBuilder.toString();
+
             } finally {
                 if (reader != null) {
                     reader.close();
                 }
             }
-
-            return null;
+            //return null;
         }
     }
 }
