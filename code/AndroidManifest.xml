@@ -11,7 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ShowFilmActivity">
+            <intent-filter>
+                <action android:name="com.eugene.SHOW_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +27,8 @@
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".FindFilmActivity" />
-        <activity android:name=".FilmListActivity"></activity>
-        <activity android:name=".ShowFilmInformationActivity"></activity>
+        <activity android:name=".FilmListActivity" />
+        <activity android:name=".ShowFilmInformationActivity" />
     </application>
 
 </manifest>

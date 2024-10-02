@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -28,10 +30,47 @@ public class FindFilmActivity extends AppCompatActivity {
         Bundle arguments = getIntent().getExtras();
         visitor = arguments.getBoolean("visitorFlag");
 
+        setContentView(R.layout.activity_find_film);
+
+        Button findButton = findViewById(R.id.button_panel).findViewById(R.id.third_button);
+        findButton.setText("Find");
+        findButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                find(view);
+            }
+        });
+
         if (visitor) {
-            setContentView(R.layout.activity_find_film_visitor);
+            Button signUpButton = findViewById(R.id.button_panel).findViewById(R.id.first_button);
+            signUpButton.setText("Sign up");
+            signUpButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    signUp(view);
+                }
+            });
+
+            LinearLayout panelButton = findViewById(R.id.button_panel);
+            panelButton.removeView(findViewById(R.id.second_button));
         } else {
-            setContentView(R.layout.activity_find_film_user);
+            Button cancelButton = findViewById(R.id.button_panel).findViewById(R.id.first_button);
+            cancelButton.setText("Cancel");
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cancel(view);
+                }
+            });
+
+            Button exitButton = findViewById(R.id.button_panel).findViewById(R.id.second_button);
+            exitButton.setText("Exit");
+            exitButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    exit(view);
+                }
+            });
 
             userName = arguments.getString("username");
         }
@@ -113,7 +152,14 @@ public class FindFilmActivity extends AppCompatActivity {
         private String getContent(String filmName) throws IOException {
             BufferedReader reader = null;
             try {
-                URL url = new URL("https://www.omdbapi.com/?t=" + filmName + "&plot=full&apikey=1d4c22a7");
+                String urlstr = "https://www.omdbapi.com/?t=" + filmName + "&plot=full&apikey=1d4c22a7";
+
+                EditText editText = findViewById(R.id.find_film_year);
+                if (editText.getText().toString() != "" ){
+                    urlstr = urlstr + "&y=" + editText.getText().toString();
+                }
+
+                URL url = new URL(urlstr);
 
                 HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
 

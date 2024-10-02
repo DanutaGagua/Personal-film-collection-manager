@@ -1,61 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/found_film_name"
-
+    android:layout_height="match_parent">
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_height="match_parent">
 
-        android:textAlignment="center"
-        android:textSize="26sp"/>
+        <TableRow>
+            <TextView
+                android:text="Year"
+                style="@style/FilmInfoCol1Style" />
 
+            <TextView
+                android:id="@+id/found_film_year"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/found_film_year"
+        <TableRow>
+            <TextView
+                android:text="Type"
+                style="@style/FilmInfoCol1Style" />
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/found_film_name"
+            <TextView
+                android:id="@+id/found_film_type"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
 
-        android:textSize="20sp"/>
-    />
+        <TableRow>
+            <TextView
+                android:text="Rated"
+                style="@style/FilmInfoCol1Style" />
 
-    <TextView
-        android:id="@+id/found_film_release_date"
+            <TextView
+                android:id="@+id/found_film_rated"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/found_film_year"
+        <TableRow>
+            <TextView
+                android:text="Genre"
+                style="@style/FilmInfoCol1Style" />
 
-        android:textSize="20sp"/>
-    />
+            <TextView
+                android:id="@+id/found_film_genre"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/found_film_country"
+        <TableRow>
+            <TextView
+                android:text="Release Date"
+                style="@style/FilmInfoCol1Style" />
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/found_film_release_date"
+            <TextView
+                android:id="@+id/found_film_release_date"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
 
-        android:textSize="20sp"/>
-    />
+        <TableRow>
+            <TextView
+                android:text="Country"
+                style="@style/FilmInfoCol1Style" />
 
-    <TextView
-        android:id="@+id/found_film_runtime"
+            <TextView
+                android:id="@+id/found_film_country"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/found_film_country"
+        <TableRow>
+            <TextView
+                android:text="Language"
+                style="@style/FilmInfoCol1Style" />
 
-        android:textSize="20sp"/>
-    />
+            <TextView
+                android:id="@+id/found_film_language"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
 
-</RelativeLayout>
+        <TableRow>
+            <TextView
+                android:text="Actors"
+                style="@style/FilmInfoCol1Style" />
+
+            <TextView
+                android:id="@+id/found_film_actors"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Runtime"
+                style="@style/FilmInfoCol1Style" />
+
+            <TextView
+                android:id="@+id/found_film_runtime"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Rating"
+                style="@style/FilmInfoCol1Style" />
+
+            <TextView
+                android:id="@+id/found_film_rating"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Awards"
+                style="@style/FilmInfoCol1Style" />
+            <TextView
+                android:id="@+id/found_film_awards"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Plot:"
+                style="@style/FilmInfoCol1Style" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/found_film_plot"
+                style="@style/FilmInfoCol1Style" />
+        </TableRow>
+    </TableLayout>
+</ScrollView>

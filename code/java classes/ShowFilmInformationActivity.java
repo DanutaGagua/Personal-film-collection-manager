@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ShowFilmInformationActivity extends AppCompatActivity {
@@ -20,10 +22,56 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
         visitor = arguments.getBoolean("visitorFlag");
         film = new Film(arguments.getString("filmInfo"));
 
+        setContentView(R.layout.activity_show_found_film_information);
+
         if (visitor) {
-            setContentView(R.layout.activity_show_found_film_information_visitor);
+            Button signUpButton = findViewById(R.id.button_panel).findViewById(R.id.first_button);
+            signUpButton.setText("Sign up");
+            signUpButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    signUp(view);
+                }
+            });
+
+            Button backButton = findViewById(R.id.button_panel).findViewById(R.id.second_button);
+            backButton.setText("Back");
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    back(view);
+                }
+            });
+
+            LinearLayout panelButton = findViewById(R.id.button_panel);
+            panelButton.removeView(findViewById(R.id.third_button));
         } else {
-            setContentView(R.layout.activity_show_found_film_information_user);
+            Button cancelButton = findViewById(R.id.button_panel).findViewById(R.id.first_button);
+            cancelButton.setText("Cancel");
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cancel(view);
+                }
+            });
+
+            Button exitButton = findViewById(R.id.button_panel).findViewById(R.id.second_button);
+            exitButton.setText("Exit");
+            exitButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    exit(view);
+                }
+            });
+
+            Button addButton = findViewById(R.id.button_panel).findViewById(R.id.third_button);
+            addButton.setText("Add");
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    add(view);
+                }
+            });
 
             userName = arguments.getString("username");
         }
@@ -32,21 +80,44 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
     }
 
     private void setInfo() {
-        TextView textView = findViewById(R.id.found_film_name);
+        TextView textInfo = findViewById(R.id.found_film_name);
+        textInfo.setText(film.getName());
 
-        textView.setText(film.getName());
+        textInfo = findViewById(R.id.found_film_year);
+        textInfo.setText(film.getYear());
 
-        TextView textInfo = findViewById(R.id.found_film_year);
-        textInfo.setText("Year           " + film.getYear());
+        textInfo = findViewById(R.id.found_film_type);
+        textInfo.setText(film.getType());
+
+        textInfo = findViewById(R.id.found_film_rated);
+        textInfo.setText(film.getRated());
+
+        textInfo = findViewById(R.id.found_film_genre);
+        textInfo.setText(film.getGenre());
 
         textInfo = findViewById(R.id.found_film_release_date);
-        textInfo.setText("Release Date   " + film.getReleaseDate());
+        textInfo.setText(film.getReleaseDate());
 
         textInfo = findViewById(R.id.found_film_country);
-        textInfo.setText("Country        " + film.getCountry());
+        textInfo.setText(film.getCountry());
+
+        textInfo = findViewById(R.id.found_film_language);
+        textInfo.setText(film.getLanguage());
+
+        textInfo = findViewById(R.id.found_film_actors);
+        textInfo.setText(film.getActors());
 
         textInfo = findViewById(R.id.found_film_runtime);
-        textInfo.setText("Runtime        " + film.getRuntime());
+        textInfo.setText(film.getRuntime());
+
+        textInfo = findViewById(R.id.found_film_rating);
+        textInfo.setText(film.getRating());
+
+        textInfo = findViewById(R.id.found_film_awards);
+        textInfo.setText(film.getAwards());
+
+        textInfo = findViewById(R.id.found_film_plot);
+        textInfo.setText(film.getPlot());
     }
 
     public void back(View view) {
@@ -85,7 +156,14 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
 
     private void addNewFilmToDataBase(Film film) {
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
-        db.execSQL("INSERT INTO " + userName + " VALUES ('" + film.getName() + "','" + film.getYear() + "','" + film.getReleaseDate() + "','"+ film.getCountry() +"','"+ film.getRuntime() +"');");
+
+        String values = film.getName() + "','" + film.getYear() + "','" + film.getType();
+        values += "','" + film.getRated() + "','" + film.getGenre() + "','" + film.getReleaseDate();
+        values += "','" + film.getCountry() + "','" + film.getLanguage() + "','" + film.getActors();
+        values += "','" + film.getRuntime() + "','" + film.getRating() + "','" + film.getAwards();
+        values += "','" + film.getPlot() + "');";
+
+        db.execSQL("INSERT INTO " + userName + " VALUES ('" + values);
         db.close();
     }
 }

@@ -7,65 +7,50 @@
 
     tools:context=".MainActivity"
 
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="6">
 
     <TextView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
 
         android:text="Sign in or sign up"
         android:textAlignment="center"
         android:textSize="26sp"/>
 
-    <Button
-        android:layout_marginTop="15dp"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
+    <include
+        layout="@layout/button"
+        android:id="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-        android:text="Sign in"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="20sp"
+    <include
+        layout="@layout/button"
+        android:id="@+id/sign_up_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-        android:onClick="signIn"/>
-
-    <Button
-        android:layout_marginTop="40dp"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-
-        android:text="Sign up"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-
-        android:onClick="signUp"/>
-
-    <Button
-        android:layout_marginTop="40dp"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-
-        android:text="Sign in as visitor"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-
-        android:onClick="signInAsVisitor"/>
+    <include
+        layout="@layout/button"
+        android:id="@+id/sign_in_as_visitor_button"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <TextView
         android:id="@+id/help_text_view"
 
-        android:layout_marginTop="40dp"
-        android:layout_width="220dp"
-        android:layout_height="120dp"
+        android:layout_width="240dp"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:layout_gravity="center"
+        android:layout_marginTop="40dp"
 
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -15,6 +15,8 @@ public class FilmListActivity extends AppCompatActivity {
     private User user = new User();
     String[] films;
 
+    public static final String ACTION ="com.eugene.SHOW_ACTIVITY";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,25 +36,20 @@ public class FilmListActivity extends AppCompatActivity {
             textView.setText("There are not films in list");
         }
 
-        // создаем адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,
-                android.R.layout.simple_list_item_1, films);
-        // устанавливаем для списка адаптер
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, films);
         filmList.setAdapter(adapter);
-        // добвляем для списка слушатель
-        filmList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        filmList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-            {
-                // по позиции получаем выбранный элемент
-                String selectedItem = films[position];
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Intent intent = new Intent(ACTION);
+                intent.putExtra("filmInfo", user.getFilmList().findFilm(films[position]));
+                startActivity(intent);
             }
         });
 
         filmList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id)
-            {
+            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
                 return true;
             }
         });
@@ -103,11 +100,19 @@ public class FilmListActivity extends AppCompatActivity {
             do{
                 String name = query.getString(0);
                 String year = query.getString(1);
-                String releaseDate = query.getString(2);
-                String country = query.getString(3);
-                String runtime = query.getString(4);
+                String type = query.getString(2);
+                String rated = query.getString(3);
+                String genre = query.getString(4);
+                String releaseDate = query.getString(5);
+                String country = query.getString(6);
+                String language = query.getString(7);
+                String actors = query.getString(8);
+                String runtime = query.getString(9);
+                String rating = query.getString(10);
+                String awards = query.getString(11);
+                String plot = query.getString(12);
 
-                filmList.addFilm(new Film(name, year, releaseDate, country, "", "", runtime));
+                filmList.addFilm(new Film(name, year, type, rated, genre, releaseDate, country, language, actors, runtime, rating, awards, plot));
             } while(query.moveToNext());
         }
 

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,10 +28,31 @@ public class SignUpActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.activity_sign_up_info);
         textView.setText("Enter username and \n add new user");
+
+        Button cancelButton = findViewById(R.id.cancel_button).findViewById(R.id.button);
+        cancelButton.setText("Cancel");
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancel(view);
+            }
+        });
+
+        Button signUpButton = findViewById(R.id.sign_up_button).findViewById(R.id.button);
+        signUpButton.setText("Sign up");
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signUp(view);
+            }
+        });
+
+        EditText editText = findViewById(R.id.new_user_name).findViewById(R.id.edit_text);
+        editText.setHint("Enter username");
     }
 
     public void signUp(View view) {
-        EditText editText = findViewById(R.id.new_user_name);
+        EditText editText = findViewById(R.id.new_user_name).findViewById(R.id.edit_text);
         String newUserName = editText.getText().toString();
 
         if (!newUserName.equals("")) {

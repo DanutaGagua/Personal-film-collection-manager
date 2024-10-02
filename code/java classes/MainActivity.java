@@ -1,67 +1,76 @@
 package com.example.personalfilmcollectionmanager;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class SignUpActivity extends AppCompatActivity {
-    private String previousClassName = "";
-    private UserList userList;
+import java.lang.reflect.Method;
+
+public class MainActivity extends AppCompatActivity {
     private boolean visitor = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_main);
 
-        Bundle arguments = getIntent().getExtras();
-        previousClassName = arguments.getString("previousClassName");
-        visitor = arguments.getBoolean("visitorFlag");
+        setHelpTextView();
 
-        TextView textView = findViewById(R.id.activity_sign_in_info);
-        textView.setText("Enter username and \n add new user");
+        Button signInButton = findViewById(R.id.sign_in_button).findViewById(R.id.button);
+        signInButton.setText("Sign in");
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn(view);
+            }
+        });
+
+        Button signUpButton = findViewById(R.id.sign_up_button).findViewById(R.id.button);
+        signUpButton.setText("Sign up");
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signUp(view);
+            }
+        });
+
+        Button signInAsVisitorButton = findViewById(R.id.sign_in_as_visitor_button).findViewById(R.id.button);
+        signInAsVisitorButton.setText("Sign in as visitor");
+        signInAsVisitorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signInAsVisitor(view);
+            }
+        });
+    }
+
+    public void signIn(View view) {
+        startActivity(new Intent(this, SignInActivity.class));
     }
 
     public void signUp(View view) {
-        //if ()
-
-        //Intent intent = new Intent(this, SignInActivity.class);
-        //startActivity(intent);
-    }
-
-    public void cancel(View view) {
-        Intent intent;
-
-        if (previousClassName.equals("MainActivity")) {
-            intent = new Intent(this, MainActivity.class);
-        } else if (previousClassName.equals("FindFilmActivity")) {
-            intent = new Intent(this, FindFilmActivity.class);
-        } else {
-            intent = new Intent(this, ShowFilmInformationActivity.class);
-        }
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        Intent intent = new Intent(this, SignUpActivity.class);
         intent.putExtra("visitorFlag", visitor);
+        intent.putExtra("previousClassName", "MainActivity");
+
         startActivity(intent);
     }
 
-    private UserList getUserList() {
-        UserList userList = new UserList();
+    public void signInAsVisitor(View view) {
+        visitor = true;
 
-        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS users (name TEXT)");
-        Cursor query = db.rawQuery("SELECT * FROM users;", null);
+        Intent intent = new Intent(this, FindFilmActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("visitorFlag", visitor);
 
-        if(query.moveToFirst()) {
-            String name = query.getString(0);
+        startActivity(intent);
+    }
 
-            userList.addUser(new User(name));
-        }
-
-        return userList;
+    private void setHelpTextView() {
+        TextView textView = findViewById(R.id.help_text_view);
+        textView.setText("Help:\nIf you want to use application without signing up click button \"Sign in as visitor\"");
     }
 }

@@ -1,53 +1,30 @@
 package com.example.personalfilmcollectionmanager;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class UserList {
-    private ArrayList<User> userList;
+public class User implements Serializable {
+    private String name;
+    private FilmList filmList;
 
-    public UserList() {
-        userList = new ArrayList<>();
+    public User() {
+        this.name = "";
+        filmList = new FilmList();
     }
 
-    public boolean addUser(User user) {
-        if (userList.contains(user)) {
-            return false;
-        } else {
-            userList.add(user);
-
-            return true;
-        }
+    public User(String name) {
+        this.name = name;
+        filmList = new FilmList();
     }
 
-    public void deleteUser(User user) {
-        userList.remove(user);
+    public String getName() {
+        return name;
     }
 
-    public int getUserNumber() {
-        return userList.size();
+    public FilmList getFilmList() {
+        return filmList;
     }
 
-    public String[] getUserNames() {
-        String[] names = new String[userList.size()];
-
-        for (User user: userList) {
-            names[userList.indexOf(user)] = user.getName();
-        }
-
-        return names;
-    }
-
-    public User findUser(String name) {
-        User user = new User();
-
-        for (User userIndex: userList) {
-            if (userIndex.getName().equals(name)) {
-                user = userIndex;
-
-                break;
-            }
-        }
-
-        return user;
+    public void setFilmList(FilmList filmList) {
+        this.filmList = filmList;
     }
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,10 +27,28 @@ public class SignInActivity extends AppCompatActivity {
         String[] users = userList.getUserNames();
 
         Spinner spinner = findViewById(R.id.users);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, users);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item , users);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
         spinner.setSelection(0);
+
+        Button cancelButton = findViewById(R.id.cancel_button).findViewById(R.id.button);
+        cancelButton.setText("Cancel");
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancel(view);
+            }
+        });
+
+        Button signInButton = findViewById(R.id.sign_in_button).findViewById(R.id.button);
+        signInButton.setText("Sign in");
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn(view);
+            }
+        });
     }
 
     public void signIn(View view) {
