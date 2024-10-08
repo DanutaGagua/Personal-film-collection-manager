@@ -1,8 +1,6 @@
 package com.example.personalfilmcollectionmanager;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +12,7 @@ public class SignUpActivity extends AppCompatActivity {
     private String previousClassName = "";
     private UserList userList;
     private boolean visitor = false;
+    private Database db = new Database();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,28 +23,13 @@ public class SignUpActivity extends AppCompatActivity {
         previousClassName = arguments.getString("previousClassName");
         visitor = arguments.getBoolean("visitorFlag");
 
-        userList = getUserList();
+        userList = db.getUserList(getApplicationContext());
 
         TextView textView = findViewById(R.id.activity_sign_up_info);
         textView.setText("Enter username and \n add new user");
 
-        Button cancelButton = findViewById(R.id.cancel_button).findViewById(R.id.button);
-        cancelButton.setText("Cancel");
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cancel(view);
-            }
-        });
-
-        Button signUpButton = findViewById(R.id.sign_up_button).findViewById(R.id.button);
-        signUpButton.setText("Sign up");
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signUp(view);
-            }
-        });
+        setButton(R.id.cancel_button, "Cancel", this::cancel);
+        setButton(R.id.sign_up_button, "Sign up", this::signUp);
 
         EditText editText = findViewById(R.id.new_user_name).findViewById(R.id.edit_text);
         editText.setHint("Enter username");
@@ -65,7 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
             } else {
                 userList.addUser(new User(newUserName));
 
-                addNewUserToDataBase(newUserName);
+                db.addNewUserToDataBase(getApplicationContext(), newUserName);
 
                 Intent intent = new Intent(this, FilmListActivity.class);
                 intent.putExtra("username", newUserName);
@@ -90,30 +74,9 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private UserList getUserList() {
-        UserList userList = new UserList();
-
-        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS users (name TEXT)");
-        Cursor query = db.rawQuery("SELECT * FROM users;", null);
-
-        if(query.moveToFirst()) {
-            do{
-                String name = query.getString(0);
-
-                userList.addUser(new User(name));
-            } while(query.moveToNext());
-        }
-
-        query.close();
-        db.close();
-
-        return userList;
-    }
-
-    private void addNewUserToDataBase(String newUserName) {
-        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
-        db.execSQL("INSERT INTO users VALUES ('"+ newUserName +"');");
-        db.close();
+    private void setButton(int id, String name, View.OnClickListener listener){
+        Button button = findViewById(id).findViewById(R.id.button);
+        button.setText(name);
+        button.setOnClickListener(listener);
     }
 }

@@ -1,13 +1,18 @@
 package com.example.personalfilmcollectionmanager;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 public class ShowFilmInformationActivity extends AppCompatActivity {
     private boolean visitor = false;
@@ -25,53 +30,13 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_found_film_information);
 
         if (visitor) {
-            Button signUpButton = findViewById(R.id.button_panel).findViewById(R.id.first_button);
-            signUpButton.setText("Sign up");
-            signUpButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    signUp(view);
-                }
-            });
-
-            Button backButton = findViewById(R.id.button_panel).findViewById(R.id.second_button);
-            backButton.setText("Back");
-            backButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    back(view);
-                }
-            });
-
-            LinearLayout panelButton = findViewById(R.id.button_panel);
-            panelButton.removeView(findViewById(R.id.third_button));
+            setButton(R.id.first_button, "Sign up", this::signUp);
+            setButton(R.id.second_button, "Back", this::back);
+            findViewById(R.id.button_panel).findViewById(R.id.third_button).setVisibility(View.GONE);
         } else {
-            Button cancelButton = findViewById(R.id.button_panel).findViewById(R.id.first_button);
-            cancelButton.setText("Cancel");
-            cancelButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    cancel(view);
-                }
-            });
-
-            Button exitButton = findViewById(R.id.button_panel).findViewById(R.id.second_button);
-            exitButton.setText("Exit");
-            exitButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    exit(view);
-                }
-            });
-
-            Button addButton = findViewById(R.id.button_panel).findViewById(R.id.third_button);
-            addButton.setText("Add");
-            addButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    add(view);
-                }
-            });
+            setButton(R.id.first_button, "Cancel", this::cancel);
+            setButton(R.id.second_button, "Exit", this::exit);
+            setButton(R.id.third_button, "Add", this::add);
 
             userName = arguments.getString("username");
         }
@@ -80,44 +45,34 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
     }
 
     private void setInfo() {
-        TextView textInfo = findViewById(R.id.found_film_name);
-        textInfo.setText(film.getName());
+        setTextViewInfo(R.id.found_film_name, film.getName());
+        setTextViewInfo(R.id.found_film_year, film.getYear());
+        setTextViewInfo(R.id.found_film_type, film.getType());
+        setTextViewInfo(R.id.found_film_rated, film.getRated());
+        setTextViewInfo(R.id.found_film_genre, film.getGenre());
+        setTextViewInfo(R.id.found_film_release_date, film.getReleaseDate());
+        setTextViewInfo(R.id.found_film_country, film.getCountry());
+        setTextViewInfo(R.id.found_film_language, film.getLanguage());
+        setTextViewInfo(R.id.found_film_actors, film.getActors());
+        setTextViewInfo(R.id.found_film_runtime, film.getRuntime());
+        setTextViewInfo(R.id.found_film_rating, film.getRating());
+        setTextViewInfo(R.id.found_film_awards, film.getAwards());
+        setTextViewInfo(R.id.found_film_plot, film.getPlot());
 
-        textInfo = findViewById(R.id.found_film_year);
-        textInfo.setText(film.getYear());
+        findViewById(R.id.show_user_feedback).setVisibility(View.GONE);
+        findViewById(R.id.film_user_feedback).setVisibility(View.GONE);
 
-        textInfo = findViewById(R.id.found_film_type);
-        textInfo.setText(film.getType());
+    }
 
-        textInfo = findViewById(R.id.found_film_rated);
-        textInfo.setText(film.getRated());
+    private void setTextViewInfo(int id, String info){
+        TextView textInfo = findViewById(id);
+        textInfo.setText(info);
+    }
 
-        textInfo = findViewById(R.id.found_film_genre);
-        textInfo.setText(film.getGenre());
-
-        textInfo = findViewById(R.id.found_film_release_date);
-        textInfo.setText(film.getReleaseDate());
-
-        textInfo = findViewById(R.id.found_film_country);
-        textInfo.setText(film.getCountry());
-
-        textInfo = findViewById(R.id.found_film_language);
-        textInfo.setText(film.getLanguage());
-
-        textInfo = findViewById(R.id.found_film_actors);
-        textInfo.setText(film.getActors());
-
-        textInfo = findViewById(R.id.found_film_runtime);
-        textInfo.setText(film.getRuntime());
-
-        textInfo = findViewById(R.id.found_film_rating);
-        textInfo.setText(film.getRating());
-
-        textInfo = findViewById(R.id.found_film_awards);
-        textInfo.setText(film.getAwards());
-
-        textInfo = findViewById(R.id.found_film_plot);
-        textInfo.setText(film.getPlot());
+    private void setButton(int id, String name, View.OnClickListener listener){
+        Button button = findViewById(R.id.button_panel).findViewById(id);
+        button.setText(name);
+        button.setOnClickListener(listener);
     }
 
     public void back(View view) {
@@ -157,13 +112,34 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
     private void addNewFilmToDataBase(Film film) {
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
 
-        String values = film.getName() + "','" + film.getYear() + "','" + film.getType();
-        values += "','" + film.getRated() + "','" + film.getGenre() + "','" + film.getReleaseDate();
-        values += "','" + film.getCountry() + "','" + film.getLanguage() + "','" + film.getActors();
-        values += "','" + film.getRuntime() + "','" + film.getRating() + "','" + film.getAwards();
-        values += "','" + film.getPlot() + "');";
+        String name = film.getName().replace("\'", "\'\'");
 
-        db.execSQL("INSERT INTO " + userName + " VALUES ('" + values);
+        Cursor query = db.rawQuery("SELECT name, year FROM " + userName + " WHERE name = \'" + name + "\' AND year = " + film.getYear(), null);
+        if (query.getCount() == 0){
+            String params = " (name, year, type, rated, genre,";
+            params += " release_date, country, language, actors,";
+            params += " runtime, rating, awards, plot)";
+
+            String values = name + "','" + film.getYear() + "','";
+            values += film.getType() + "','" + film.getRated() + "','" + film.getGenre() + "','";
+            values += film.getReleaseDate() + "','" + film.getCountry() + "','" + film.getLanguage() + "','";
+            values += film.getActors().replace("\'", "\'\'") + "','" + film.getRuntime() + "','";
+            values += film.getRating() + "','" + film.getAwards().replace("\'", "\'\'");
+            values += "','" + film.getPlot().replace("\'", "\'\'");
+
+            db.execSQL("INSERT INTO " + userName + params + " VALUES ('" + values + "');");
+            db.close();
+
+            Toast toast = Toast.makeText(this, film.getName() + " " + film.getYear() + " was added", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 0,160);   // import android.view.Gravity;
+            toast.show();
+        } else {
+            Toast toast = Toast.makeText(this, "Film with such name and year is already in list", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 0,160);   // import android.view.Gravity;
+            toast.show();
+        }
+
+        query.close();
         db.close();
     }
 }

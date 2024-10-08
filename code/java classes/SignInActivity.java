@@ -1,8 +1,6 @@
 package com.example.personalfilmcollectionmanager;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,17 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SignInActivity extends AppCompatActivity {
     private UserList userList;
+    private Database db = new Database();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        userList = getUserList();
+        userList = db.getUserList(getApplicationContext());
 
         setInfo();
 
@@ -32,23 +30,8 @@ public class SignInActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
         spinner.setSelection(0);
 
-        Button cancelButton = findViewById(R.id.cancel_button).findViewById(R.id.button);
-        cancelButton.setText("Cancel");
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cancel(view);
-            }
-        });
-
-        Button signInButton = findViewById(R.id.sign_in_button).findViewById(R.id.button);
-        signInButton.setText("Sign in");
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn(view);
-            }
-        });
+        setButton(R.id.cancel_button, "Cancel", this::cancel);
+        setButton(R.id.sign_in_button, "Sign in", this::signIn);
     }
 
     public void signIn(View view) {
@@ -68,27 +51,6 @@ public class SignInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private UserList getUserList() {
-        UserList userList = new UserList();
-
-        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS users (name TEXT)");
-        Cursor query = db.rawQuery("SELECT * FROM users;", null);
-
-        if(query.moveToFirst()) {
-            do{
-                String name = query.getString(0);
-
-                userList.addUser(new User(name));
-            } while(query.moveToNext());
-        }
-
-        query.close();
-        db.close();
-
-        return userList;
-    }
-
     private void setInfo() {
         TextView textView = findViewById(R.id.activity_sign_in_info);
 
@@ -97,5 +59,11 @@ public class SignInActivity extends AppCompatActivity {
         } else {
             textView.setText("Select your username \n and sign in");
         }
+    }
+
+    private void setButton(int id, String name, View.OnClickListener listener){
+        Button button = findViewById(id).findViewById(R.id.button);
+        button.setText(name);
+        button.setOnClickListener(listener);
     }
 }

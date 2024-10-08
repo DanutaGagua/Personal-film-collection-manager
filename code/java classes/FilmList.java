@@ -23,31 +23,32 @@ public class FilmList {
         filmList.remove(film);
     }
 
-    public String[] getFilmNames() {
-        String[] names = new String[filmList.size()];
-
-        for (Film film: filmList) {
-            names[filmList.indexOf(film)] = film.getName() + " " + film.getYear();
-        }
-
-        return names;
+    public ArrayList<Film> getFilms() {
+        return filmList;
     }
 
     public int getFilmListNumber() {
         return filmList.size();
     }
 
-    public Film findFilm(String name) {
-        Film film = new Film();
+    public ArrayList<Film> findFilms(String name) {
+        ArrayList<Film> returnFilmList = new ArrayList<>();
 
         for (Film filmIndex: filmList) {
-            if (name.equals(filmIndex.getName() + " " + filmIndex.getYear())) {
-                film = filmIndex;
-
-                break;
+            if (filmIndex.getName().toLowerCase().contains(name.toLowerCase())) {
+                returnFilmList.add(filmIndex);
             }
         }
 
-        return film;
+        return returnFilmList;
+    }
+
+    public Film findFilm(Film film) {
+        for (Film filmIndex: filmList) {
+            if (film.equals(filmIndex)) {
+                return filmIndex;
+            }
+        }
+        return null;
     }
 }

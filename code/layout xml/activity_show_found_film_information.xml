@@ -9,23 +9,11 @@
 
     <TextView
         android:id="@+id/found_film_name"
-
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="17dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-
-        android:textAlignment="center"
-        android:textSize="26sp"/>
+        style="@style/HeaderStyle"/>
 
     <include layout="@layout/found_info_layout"
-        android:layout_marginHorizontal="25dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button_panel"
-        android:layout_below="@+id/found_film_name"
-        />
+        style="@style/FilmInfoStyle" />
 
     <include
         layout="@layout/button_panel"

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -32,45 +33,16 @@ public class FindFilmActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_find_film);
 
-        Button findButton = findViewById(R.id.button_panel).findViewById(R.id.third_button);
-        findButton.setText("Find");
-        findButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                find(view);
-            }
-        });
+        setButton(R.id.third_button, "Find", this::find);
 
         if (visitor) {
-            Button signUpButton = findViewById(R.id.button_panel).findViewById(R.id.first_button);
-            signUpButton.setText("Sign up");
-            signUpButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    signUp(view);
-                }
-            });
+            setButton(R.id.first_button, "Sign up", this::signUp);
 
             LinearLayout panelButton = findViewById(R.id.button_panel);
             panelButton.removeView(findViewById(R.id.second_button));
         } else {
-            Button cancelButton = findViewById(R.id.button_panel).findViewById(R.id.first_button);
-            cancelButton.setText("Cancel");
-            cancelButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    cancel(view);
-                }
-            });
-
-            Button exitButton = findViewById(R.id.button_panel).findViewById(R.id.second_button);
-            exitButton.setText("Exit");
-            exitButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    exit(view);
-                }
-            });
+            setButton(R.id.first_button, "Cancel", this::cancel);
+            setButton(R.id.second_button, "Exit", this::exit);
 
             userName = arguments.getString("username");
         }
@@ -80,6 +52,12 @@ public class FindFilmActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         filmInfo = "";
+    }
+
+    private void setButton(int id, String name, View.OnClickListener listener){
+        Button button = findViewById(R.id.button_panel).findViewById(id);
+        button.setText(name);
+        button.setOnClickListener(listener);
     }
 
     public void cancel(View view) {

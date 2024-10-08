@@ -19,32 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
         setHelpTextView();
 
-        Button signInButton = findViewById(R.id.sign_in_button).findViewById(R.id.button);
-        signInButton.setText("Sign in");
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn(view);
-            }
-        });
-
-        Button signUpButton = findViewById(R.id.sign_up_button).findViewById(R.id.button);
-        signUpButton.setText("Sign up");
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signUp(view);
-            }
-        });
-
-        Button signInAsVisitorButton = findViewById(R.id.sign_in_as_visitor_button).findViewById(R.id.button);
-        signInAsVisitorButton.setText("Sign in as visitor");
-        signInAsVisitorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signInAsVisitor(view);
-            }
-        });
+        setButton(R.id.sign_in_button, "Sign in", this::signIn);
+        setButton(R.id.sign_up_button, "Sign up", this::signUp);
+        setButton(R.id.sign_in_as_visitor_button, "Sign in as visitor",
+                 this::signInAsVisitor);
     }
 
     public void signIn(View view) {
@@ -72,5 +50,11 @@ public class MainActivity extends AppCompatActivity {
     private void setHelpTextView() {
         TextView textView = findViewById(R.id.help_text_view);
         textView.setText("Help:\nIf you want to use application without signing up click button \"Sign in as visitor\"");
+    }
+
+    private void setButton(int id, String name, View.OnClickListener listener){
+        Button button = findViewById(id).findViewById(R.id.button);
+        button.setText(name);
+        button.setOnClickListener(listener);
     }
 }

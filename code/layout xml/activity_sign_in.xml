@@ -10,14 +10,12 @@
 
     <TextView
         android:layout_marginTop="100dp"
-        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_gravity="center_horizontal"
 
         android:text="Signing in"
-        android:textAlignment="center"
-        android:textSize="26sp"/>
+        style="@style/MainHeaderStyle"/>
 
     <TextView
         android:id="@+id/activity_sign_in_info"

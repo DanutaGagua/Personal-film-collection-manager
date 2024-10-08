@@ -33,7 +33,8 @@ public class Film implements Serializable {
                 String runtime,
                 String rating,
                 String awards,
-                String plot) {
+                String plot,
+                String userFeedback) {
         this.name = name;
         this.year = year;
         this.type = type;
@@ -47,6 +48,7 @@ public class Film implements Serializable {
         this.rating = rating;
         this.awards = awards;
         this.plot = plot;
+        this.userFeedback = userFeedback;
     }
 
     public Film(String filmInfo) {
@@ -119,5 +121,9 @@ public class Film implements Serializable {
 
     public String getPlot() {
         return plot;
+    }
+
+    public String getUserFeedback(){
+        return userFeedback;
     }
 }

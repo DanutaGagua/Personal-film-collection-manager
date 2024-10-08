@@ -119,13 +119,29 @@
         <TableRow>
             <TextView
                 android:text="Plot:"
-                style="@style/FilmInfoCol1Style" />
+                style="@style/FilmInfoCol2Style" />
         </TableRow>
 
         <TableRow>
             <TextView
                 android:id="@+id/found_film_plot"
-                style="@style/FilmInfoCol1Style" />
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/show_user_feedback"
+                android:text="Your feedback:"
+                android:textColor="@color/userFeedbackColor"
+                style="@style/FilmInfoCol2Style" />
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:id="@+id/film_user_feedback"
+                android:textColor="@color/userFeedbackColor"
+                android:layout_width="match_parent"
+                style="@style/FilmInfoCol2Style" />
         </TableRow>
     </TableLayout>
 </ScrollView>

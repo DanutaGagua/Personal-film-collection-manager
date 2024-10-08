@@ -3,19 +3,31 @@ package com.example.personalfilmcollectionmanager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class FilmListActivity extends AppCompatActivity {
     private User user = new User();
-    String[] films;
-
-    public static final String ACTION ="com.eugene.SHOW_ACTIVITY";
+    private ArrayList<Film> films;
+    private Database db = new Database();
+    private int selectedPosition = -1;
+    private boolean findFlag = false;
+    private ListView filmList;
+    private String filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,62 +36,72 @@ public class FilmListActivity extends AppCompatActivity {
 
         Bundle arguments = getIntent().getExtras();
         user = new User(arguments.getString("username"));
+        user.setFilmList(db.getFilmList(getApplicationContext(), user.getName()));
 
-        getFilmList();
+        filmList = findViewById(R.id.film_list);
 
-        films = user.getFilmList().getFilmNames();
+        TextView header = findViewById(R.id.list_header).findViewById(R.id.film_name);
+        header.setText("Film");
 
-        ListView filmList = findViewById(R.id.film_list);
+        header = findViewById(R.id.list_header).findViewById(R.id.film_year);
+        header.setText("Year");
 
-        if (user.getFilmList().getFilmListNumber() == 0) {
-            TextView textView = findViewById(R.id.film_list_info);
-            textView.setText("There are not films in list");
-        }
+        findViewById(R.id.list_header).setBackgroundColor(Color.LTGRAY);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, films);
-        filmList.setAdapter(adapter);
-        filmList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Intent intent = new Intent(ACTION);
-                intent.putExtra("filmInfo", user.getFilmList().findFilm(films[position]));
-                startActivity(intent);
-            }
-        });
+        setMainItems();
 
-        filmList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-                return true;
-            }
-        });
+        setButton(R.id.first_button, "Exit", this::exit);
+        setButton(R.id.second_button, "Add new film", this::addNewFilm);
+        findViewById(R.id.button_panel).findViewById(R.id.third_button).setVisibility(View.GONE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getFilmList();
 
-        films = user.getFilmList().getFilmNames();
-
-        ListView filmList = findViewById(R.id.film_list);
-
-        if (user.getFilmList().getFilmListNumber() == 0) {
-            TextView textView = findViewById(R.id.film_list_info);
-            textView.setText("There are not films in list");
-        }
-
-        // создаем адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,
-                android.R.layout.simple_list_item_1, films);
-        // устанавливаем для списка адаптер
-        filmList.setAdapter(adapter);
+        user.setFilmList(db.getFilmList(getApplicationContext(), user.getName()));
+        setMainItems();
     }
 
     public void exit(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
+    }
+
+    public void cancel(View view) {
+        FilmAdapter adapter = (FilmAdapter) filmList.getAdapter();
+        adapter.switchSelection(selectedPosition);
+
+        if (findFlag){
+            setButton(R.id.first_button, "Return to list", this::returnToList);
+        } else {
+            setButton(R.id.first_button, "Exit", this::exit);
+            setMainItems();
+        }
+
+        setButton(R.id.second_button, "Add new film", this::addNewFilm);
+    }
+
+    public void deleteFilm(View view) {
+        String filmNameAndYear = films.get(selectedPosition).getName() + " " + films.get(selectedPosition).getYear();
+
+        db.deleteFilmFromDatabase(getApplicationContext(), user.getName(),
+                                  films.get(selectedPosition));
+        user.getFilmList().deleteFilm(films.get(selectedPosition));
+
+        if (findFlag){
+            setButton(R.id.first_button, "Return to list", this::returnToList);
+        } else {
+            setButton(R.id.first_button, "Exit", this::exit);
+        }
+
+        setButton(R.id.second_button, "Add new film", this::addNewFilm);
+        setMainItems();
+
+        Toast toast = Toast.makeText(this, filmNameAndYear + " was deleted", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP, 0,160);   // import android.view.Gravity;
+        toast.show();
     }
 
     public void addNewFilm(View view) {
@@ -89,36 +111,74 @@ public class FilmListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void getFilmList() {
-        FilmList filmList = new FilmList();
+    public void find(View view){
+        EditText editText = findViewById(R.id.find_panel).findViewById(R.id.find_film_name);
+        filter = editText.getText().toString();
 
-        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + user.getName() + " (name TEXT, year TEXT, release_date TEXT, country TEXT, runtime TEXT)");
-        Cursor query = db.rawQuery("SELECT * FROM " + user.getName(), null);
+        findFlag = true;
 
-        if(query.moveToFirst()) {
-            do{
-                String name = query.getString(0);
-                String year = query.getString(1);
-                String type = query.getString(2);
-                String rated = query.getString(3);
-                String genre = query.getString(4);
-                String releaseDate = query.getString(5);
-                String country = query.getString(6);
-                String language = query.getString(7);
-                String actors = query.getString(8);
-                String runtime = query.getString(9);
-                String rating = query.getString(10);
-                String awards = query.getString(11);
-                String plot = query.getString(12);
+        setMainItems();
 
-                filmList.addFilm(new Film(name, year, type, rated, genre, releaseDate, country, language, actors, runtime, rating, awards, plot));
-            } while(query.moveToNext());
+        setButton(R.id.first_button, "Return to list", this::returnToList);
+    }
+
+    public void returnToList(View view){
+        findFlag = false;
+
+        setMainItems();
+        setButton(R.id.first_button, "Exit", this::exit);
+    }
+
+    public Boolean selectItem(AdapterView<?> parent, View v, int position, long id) {
+        selectedPosition = position;
+
+        FilmAdapter adapter = (FilmAdapter)filmList.getAdapter();
+        adapter.switchSelection(position);
+
+        setButton(R.id.first_button, "Cancel", this::cancel);
+        setButton(R.id.second_button, "Delete film", this::deleteFilm);
+        return true;
+    }
+
+    private void setButton(int id, String name, View.OnClickListener listener){
+        Button button = findViewById(R.id.button_panel).findViewById(id);
+        button.setText(name);
+        button.setOnClickListener(listener);
+    }
+
+    public void showInfo(AdapterView<?> parent, View v, int position, long id) {
+        Intent intent = new Intent(this, ShowFilmActivity.class);
+        intent.putExtra("filmInfo", user.getFilmList().findFilm(films.get(position)));
+        intent.putExtra("username", user.getName());
+        startActivity(intent);
+    }
+
+    private void setTextViewAndFindPanel()  {
+        TextView textView = findViewById(R.id.film_list_info);
+        LinearLayout layout = findViewById(R.id.find_panel);
+        if (user.getFilmList().getFilmListNumber() == 0) {
+            textView.setText("There are not films in list");
+            layout.setVisibility(View.GONE);
+
+        } else{
+            layout.setVisibility(View.VISIBLE);
+            textView.setVisibility(View.GONE);
+        }
+    }
+
+    private void setMainItems(){
+        if (findFlag){
+            films = user.getFilmList().findFilms(filter);
+        }  else{
+            films = user.getFilmList().getFilms();
         }
 
-        query.close();
-        db.close();
+        setTextViewAndFindPanel();
 
-        user.setFilmList(filmList);
+        // создаем адаптер
+        FilmAdapter adapter = new FilmAdapter(this, R.layout.film_item, films);
+        filmList.setAdapter(adapter);
+        filmList.setOnItemClickListener(this::showInfo);
+        filmList.setOnItemLongClickListener(this::selectItem);
     }
 }

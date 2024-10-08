@@ -7,4 +7,5 @@
     <color name="buttonColor">#B9F6CA</color>
     <color name="spinnerColor">#FFFFA0</color>
     <color name="buttonTextColor">#555555</color>
+    <color name="userFeedbackColor">#00D4AA</color>
 </resources>
