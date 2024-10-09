@@ -1,15 +1,11 @@
 package com.example.personalfilmcollectionmanager;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +14,7 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
     private boolean visitor = false;
     private Film film;
     String userName;
+    Database db = new Database();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,44 +99,20 @@ public class ShowFilmInformationActivity extends AppCompatActivity {
     }
 
     public void add(View view) {
-        addNewFilmToDataBase(film);
-
-        Intent intent = new Intent(this, FilmListActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
-    }
-
-    private void addNewFilmToDataBase(Film film) {
-        SQLiteDatabase db = getBaseContext().openOrCreateDatabase("users.db", MODE_PRIVATE, null);
-
-        String name = film.getName().replace("\'", "\'\'");
-
-        Cursor query = db.rawQuery("SELECT name, year FROM " + userName + " WHERE name = \'" + name + "\' AND year = " + film.getYear(), null);
-        if (query.getCount() == 0){
-            String params = " (name, year, type, rated, genre,";
-            params += " release_date, country, language, actors,";
-            params += " runtime, rating, awards, plot)";
-
-            String values = name + "','" + film.getYear() + "','";
-            values += film.getType() + "','" + film.getRated() + "','" + film.getGenre() + "','";
-            values += film.getReleaseDate() + "','" + film.getCountry() + "','" + film.getLanguage() + "','";
-            values += film.getActors().replace("\'", "\'\'") + "','" + film.getRuntime() + "','";
-            values += film.getRating() + "','" + film.getAwards().replace("\'", "\'\'");
-            values += "','" + film.getPlot().replace("\'", "\'\'");
-
-            db.execSQL("INSERT INTO " + userName + params + " VALUES ('" + values + "');");
-            db.close();
+        if (db.checkIfFilmIsAlreadyInList(getApplicationContext(), userName, film.getName(), film.getYear())){
+            Toast toast = Toast.makeText(this, "Film with such name and year is already in list", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 0,160);   // import android.view.Gravity;
+            toast.show();
+        } else {
+            db.addNewFilmToDataBase(getApplicationContext(), userName, film);
 
             Toast toast = Toast.makeText(this, film.getName() + " " + film.getYear() + " was added", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.TOP, 0,160);   // import android.view.Gravity;
             toast.show();
-        } else {
-            Toast toast = Toast.makeText(this, "Film with such name and year is already in list", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP, 0,160);   // import android.view.Gravity;
-            toast.show();
         }
 
-        query.close();
-        db.close();
+        Intent intent = new Intent(this, FilmListActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 }

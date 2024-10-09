@@ -99,7 +99,65 @@ public class Database {
         db.update(username, updatedValues, "name = ? AND year = ?",
                 new String[] {film.getName(), film.getYear()});
 
-//        db.execSQL("UPDATE " + user + " SET userFeedback = \'" + userFeedback + "\' WHERE name = \'" + film.getName() + "\' AND year = \'" + film.getYear() + '\'');
+        db.close();
+    }
+
+    public boolean checkIfFilmIsAlreadyInList(Context context, String username,
+                                              String filmName, String year){
+        SQLiteDatabase db = context.openOrCreateDatabase(DB_NAME, MODE_PRIVATE, null);
+
+        Cursor query = db.query(username,
+                new String[] {"name", "year"},
+                "name = ? AND year = ?",
+                new String[] {filmName.replace("\'", "\'\'"), year},
+                null, null, null);
+
+        if (query.getCount() == 0){
+            query.close();
+            db.close();
+
+            return false;
+        } else {
+            query.close();
+            db.close();
+
+            return true;
+        }
+    }
+
+    public void addNewFilmToDataBase(Context context, String userName, Film film) {
+        SQLiteDatabase db = context.openOrCreateDatabase(DB_NAME, MODE_PRIVATE, null);
+
+        ContentValues insertValues = new ContentValues();
+        insertValues.put("name", film.getName().replace("\'", "\'\'"));
+        insertValues.put("year", film.getYear().replace("\'", "\'\'"));
+        insertValues.put("type", film.getType().replace("\'", "\'\'"));
+        insertValues.put("rated", film.getRated().replace("\'", "\'\'"));
+        insertValues.put("genre", film.getGenre().replace("\'", "\'\'"));
+        insertValues.put("release_date", film.getReleaseDate().replace("\'", "\'\'"));
+        insertValues.put("country", film.getCountry().replace("\'", "\'\'"));
+        insertValues.put("language", film.getLanguage().replace("\'", "\'\'"));
+        insertValues.put("actors", film.getActors().replace("\'", "\'\'"));
+        insertValues.put("runtime", film.getRuntime().replace("\'", "\'\'"));
+        insertValues.put("rating", film.getRating().replace("\'", "\'\'"));
+        insertValues.put("awards", film.getAwards().replace("\'", "\'\'"));
+        insertValues.put("plot", film.getPlot().replace("\'", "\'\'"));
+
+        db.insert(userName, null, insertValues);
+
+//            String params = " (name, year, type, rated, genre,";
+//            params += " release_date, country, language, actors,";
+//            params += " runtime, rating, awards, plot)";
+//
+//            String values = name + "','" + film.getYear() + "','";
+//            values += film.getType() + "','" + film.getRated() + "','" + film.getGenre() + "','";
+//            values += film.getReleaseDate() + "','" + film.getCountry() + "','" + film.getLanguage() + "','";
+//            values += film.getActors().replace("\'", "\'\'") + "','" + film.getRuntime() + "','";
+//            values += film.getRating() + "','" + film.getAwards().replace("\'", "\'\'");
+//            values += "','" + film.getPlot().replace("\'", "\'\'");
+
+//            db.execSQL("INSERT INTO " + userName + params + " VALUES ('" + values + "');");
+
         db.close();
     }
 }

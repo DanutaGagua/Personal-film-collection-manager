@@ -13,7 +13,6 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Method;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -37,9 +36,7 @@ public class FindFilmActivity extends AppCompatActivity {
 
         if (visitor) {
             setButton(R.id.first_button, "Sign up", this::signUp);
-
-            LinearLayout panelButton = findViewById(R.id.button_panel);
-            panelButton.removeView(findViewById(R.id.second_button));
+            findViewById(R.id.button_panel).findViewById(R.id.second_button).setVisibility(View.GONE);
         } else {
             setButton(R.id.first_button, "Cancel", this::cancel);
             setButton(R.id.second_button, "Exit", this::exit);
